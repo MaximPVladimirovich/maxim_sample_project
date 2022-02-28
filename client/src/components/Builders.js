@@ -5,9 +5,12 @@ export default function Builders() {
 
     useEffect(() => {
         const getBuilders = async function () {
+            const jsonHeaders = new Headers({
+                mode: 'no-cors'
+            })
             const url = "http://localhost:3001";
             // Fetch data from node server.
-            const res = await fetch(url);
+            const res = await fetch(url, { headers: jsonHeaders });
             // Parse data into json.
             const data = await res.json();
             // Set state with result.

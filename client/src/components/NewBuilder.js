@@ -5,14 +5,21 @@ export default function NewBuilder() {
 
     const jsonData = { name: 'Hello ' }
     function handleClick() {
+        const payload = JSON.stringify({
+            name: 'SHOWING IN THE CONSOLE!!!!'
+        })
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'mode': 'no-cors'
+        })
 
         // Send data to the backend via POST
         fetch('http://localhost:3001', {  // Enter your IP address here
 
             method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-
+            headers: headers,
+            body: payload
         })
     }
     return (
