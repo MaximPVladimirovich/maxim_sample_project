@@ -4,7 +4,6 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const builders_data = require('./builders.json');
-const fs = require('fs');
 
 function getBuilders() {
     return builders_data
@@ -20,6 +19,9 @@ class Database {
 
     add_builder(builder) {
         this.data.push(builder);
+    }
+    get_size() {
+        return this.data.length;
     }
 }
 
@@ -37,9 +39,13 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-    builders.add_builder(req.body);
-    console.log(builders)
-    res.send('POST request works!!')
+    // Sets id of builder.
+    if (!req.body.id) {
+        req.body.builder.id = builders.get_size() + 1;
+    }
+    // Adds new builder to the list.
+    builders.add_builder(req.body.builder);
+    res.send('Builder has been created.')
 })
 
 app.listen(port, () => {
