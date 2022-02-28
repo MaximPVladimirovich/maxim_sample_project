@@ -6,7 +6,12 @@ export default function NewBuilder() {
     const jsonData = { name: 'Hello ' }
     function handleClick() {
         const payload = JSON.stringify({
-            name: 'SHOWING IN THE CONSOLE!!!!'
+            createdAt: '2021-04-27T11:42:32.425Z',
+            name: 'NEW BUILDER',
+            phone: '(850) 698-7686',
+            email: 'Blair_Parker@gmail.com',
+            address: [Object],
+            id: '19'
         })
 
         const headers = new Headers({
