@@ -28,6 +28,13 @@ export default function NavBar() {
                             </Typography>
                         </Link>
                     </Box>
+                    <Box sx={{ mx: 2 }}>
+                        <Link to="/neworder">
+                            <Typography >
+                                New Order
+                            </Typography>
+                        </Link>
+                    </Box>
                 </Box>
             </AppBar>
         </Box>

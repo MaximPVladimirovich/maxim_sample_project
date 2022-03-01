@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+import { Box } from "@mui/material";
 const { v4: uuidv4 } = require('uuid');
 
-export default function NewOrder() {
+
+export default function NewOrder({ setItems, items }) {
     const [item, setItem] = useState({
         id: uuidv4(),
         name: "",
@@ -18,16 +20,19 @@ export default function NewOrder() {
         setOrder({ ...order, [e.target.name]: e.target.value })
     }
     const handleItemshange = (e) => {
-        setOrder({ ...order, items: { ...order.items, [e.target.name]: e.target.value } })
+        setItem({ ...item, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(order.items)
         sendData()
     }
 
-    const handleAddItem = (item) => {
-        order.items.push(item);
+    const handleAddItem = (e) => {
+        e.preventDefault();
+        console.log(item)
+        setItems([...items, item]);
     }
     function sendData() {
         const payload = JSON.stringify({
@@ -47,25 +52,30 @@ export default function NewOrder() {
         })
     }
     return (
-        <div className="App">
+        <Box width={1 / 3}>
+            <h2> Create new order</h2>
+            <form onSubmit={(e) => { handleAddItem(e) }}>
+                Add Item:
+                <br />
+                <input type="text" name="name" placeholder="Item name" value={item.name} required onChange={(e) => { handleItemshange(e) }} /><br />
+                <input type="number" name="quantity" placeholder="quantity" value={item.quantity} required onChange={(e) => { handleItemshange(e) }} /><br />
+                <input type="submit" value="Add Item" />
+            </form>
             <form onSubmit={(e) => { handleSubmit(e) }}>
-                <h2> Create new order</h2>
+
                 {/* Builder id */}
                 <label >
                     Builder:
                 </label><br />
                 <input type="text" name="builder_id" value={order.builder_id} required onChange={(e) => { handleOrderChange(e) }} /><br />
                 <label >
-                    Add Item:
-                </label><br />
-                <input type="text" name="name" value={item.name} required onChange={(e) => { handleItemshange(e) }} /><br />
-                <input type="number" name="quantity" value={item.quantity} required onChange={(e) => { handleItemshange(e) }} /><br />
-                <label>
                     Amount:
                 </label><br />
                 <p type="number" name="total_amount" value={order.total_amount} required onChange={(e) => { handleOrderChange(e) }} /><br />
                 <input type="submit" value="Submit Order" />
             </form>
-        </div>
+
+        </Box>
+
     );
 }

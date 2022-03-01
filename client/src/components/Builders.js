@@ -23,7 +23,7 @@ export default function Builders() {
         <>
             {builders.map((builder, index) => {
                 return (
-                    <p key={index}>{builder.name}</p>
+                    <p key={index} sx={{ mx: 'auto' }}>{builder.name}</p>
                 )
             })}
         </>
