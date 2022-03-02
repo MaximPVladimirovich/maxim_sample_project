@@ -1,5 +1,5 @@
 import { Box, Divider } from "@mui/material"
-import { List, ListItem, ListItemText, Paper } from "@mui/material";
+import { List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import ItemAmount from './ItemAmount';
 import SubmitOrder from "./SubmitOrder";
 
@@ -7,12 +7,14 @@ import SubmitOrder from "./SubmitOrder";
 // It functions as a reciept
 export default function OrderItems({ items, handleSubmit }) {
     return (
-        <Paper sx={{ height: '98.5%' }}>
+        <Paper sx={{ m: 1, height: '96.5%' }}>
             <Box sx={{ height: '100%' }}>
                 <List sx={{ display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <Box>
                         <ListItem>
-                            <h2>Items </h2>
+                            <Typography variant="h4">
+                                Items
+                            </Typography>
                         </ListItem>
                         <Divider variant="middle" />
                         {items.map((item, index) => (

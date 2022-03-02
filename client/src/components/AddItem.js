@@ -1,4 +1,4 @@
-import { List, ListItem, Grid, TextField, Button, Box, Paper } from "@mui/material";
+import { List, ListItem, Grid, TextField, Button, Box, Paper, Typography, Divider } from "@mui/material";
 
 export default function AddItem({ item, handleAddItem, handleItemChange }) {
     return (
@@ -6,8 +6,11 @@ export default function AddItem({ item, handleAddItem, handleItemChange }) {
             <Box sx={{ height: '100%' }}>
                 <List >
                     <ListItem>
-                        <h2>Add Item</h2>
+                        <Typography variant="h4">
+                            Add Items
+                        </Typography>
                     </ListItem>
+                    <Divider variant="middle" />
                     <ListItem>
                         <Grid container spacing={4}>
                             <Grid item>
