@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
+    console.log(req.body)
     // Sets id of builder.
     if (!req.body.builder.id) {
         req.body.builder.id = builders.get_size() + 1;

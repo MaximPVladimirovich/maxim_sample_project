@@ -4,8 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { Link } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
-
 
 export default function NavBar() {
     const [menu, setMenu] = useState(['Builders', 'New Builder', 'New Order'])
