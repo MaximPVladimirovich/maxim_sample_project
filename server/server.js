@@ -33,8 +33,6 @@ class Database {
 const builders = new Database();
 builders.set_data(getBuilders());
 
-const orders = new Database();
-
 // Middleware 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,13 +54,11 @@ app.post('/', (req, res) => {
 })
 
 app.post('/neworder', (req, res) => {
-    console.log(req.body)
-    // Sets id of order.
-    // if (!req.body.order.id) {
-    //     req.body.order.id = orders.get_size() + 1;
-    // }
-    // Adds new order to the list.
-    orders.add_item(req.body);
+    // Finds builder with an Id matching the builder_id in the Order coming through.
+    let builder = builders.data.filter(builder => builder.id === req.body.order.builder_id)[0];
+    // Creates order property if builde has none.
+    let builder_orders = !builder.orders ? builder.orders = [] : builder.orders;
+    builder_orders.push(req.body.order);
     res.send('Order has been placed.')
 })
 

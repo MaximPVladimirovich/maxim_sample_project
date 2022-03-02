@@ -25,7 +25,7 @@ export default function Order() {
     }, [])
 
     return (
-        <Box sx={{ flexGrow: 1, mx: 2, height: '50%' }}>
+        <Box sx={{ flexGrow: 1, mx: 'auto', height: '50%' }}>
             <NewOrder setItems={setItems} builders={builders} items={items} />
         </Box>
     )

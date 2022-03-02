@@ -1,42 +1,36 @@
 import * as React from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import { Link } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+
 
 export default function NavBar() {
+    const [menu, setMenu] = useState(['Builders', 'New Builder', 'New Order'])
+
     return (
-        <Box sx={{ flexGrow: 1, }}>
-            <AppBar position="static" sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', p: 2, bgcolor: 'text.primary' }}>
+        <Box sx={{ flexGrow: 2, }}>
+            <AppBar position="static" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'space-between', p: 2, bgcolor: 'text.primary' }}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Typography variant="h4" component="div" >
                         Nuts&Bolts
                     </Typography>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'flex-end', flexGrow: 4, justifyContent: 'flex-end' }}>
-                    <Box sx={{ mx: 2 }}>
-                        <Link to="/builders">
-                            <Typography >
-                                Builders
-                            </Typography>
-                        </Link>
-                    </Box>
-                    <Box sx={{ mx: 2 }}>
-                        <Link to="/newbuilder">
-                            <Typography >
-                                Create Builder
-                            </Typography>
-                        </Link>
-                    </Box>
-                    <Box sx={{ mx: 2 }}>
-                        <Link to="/neworder">
-                            <Typography >
-                                New Order
-                            </Typography>
-                        </Link>
-                    </Box>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end', flexGrow: 1, justifyContent: 'space-evenly' }}>
+                    {menu.map((item, index) => {
+                        let url = item.replace(' ', '');
+                        return (
+                            <Link key={index} href={`/${url.toLowerCase()}`} sx={{ color: '#fff' }} underline="hover" variant="text" >
+                                <Typography>
+                                    {item}
+                                </Typography>
+                            </Link>
+                        )
+                    })}
                 </Box>
-            </AppBar>
-        </Box>
+            </AppBar >
+        </Box >
     );
 }
