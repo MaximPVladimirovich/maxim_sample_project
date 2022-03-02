@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 
 export default function ItemAmount({ items }) {
     let sum = 0;
@@ -5,9 +6,9 @@ export default function ItemAmount({ items }) {
         items.map(item => sum += parseInt(item.price))
     }
     return (
-        <>
-            <p>Total: ${sum}</p>
-        </>
+        <Box>
+            <Typography>Total: ${sum}</Typography>
+        </Box>
 
     )
 }

@@ -36,7 +36,7 @@ export default function Builders() {
                         <Accordion key={index}>
                             <AccordionSummary expandIcon={< ArrowDropDownIcon />} aria-controls={`${builder.id}`} id={`${builder.id}`}>
                                 <AccountCircleIcon sx={{ m: 1 }} />
-                                <Typography sx={{ m: 1 }}>
+                                <Typography sx={{ m: 1, fontWeight: 'light' }}>
                                     {builder.name}
                                 </Typography>
                             </AccordionSummary>
