@@ -1,10 +1,9 @@
 import { useState } from "react"
-import { Box, Divider, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import AddItem from "./AddItem";
 import SelectBuilder from "./SelectBuilder";
 import ScrollMenu from "./ScrollMenu";
 import OrderItems from "./OrderItems";
-import SubmitOrder from "./SubmitOrder";
 
 const { v4: uuidv4 } = require('uuid');
 
