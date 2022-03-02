@@ -1,14 +1,26 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Box } from "@mui/material";
+import AddItem from "./AddItem";
+import SelectBuilder from "./SelectBuilder";
+import ScrollMenu from "./ScrollMenu";
+import OrderItems from "./OrderItems";
+
 const { v4: uuidv4 } = require('uuid');
 
+export default function NewOrder({ setItems, items, builders }) {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [selected, setSelected] = useState('');
 
-export default function NewOrder({ setItems, items }) {
+    // Item
+    // This will be added to the items array in an Order.
     const [item, setItem] = useState({
         id: uuidv4(),
         name: "",
-        quantity: ""
+        quantity: "",
+        price: ""
     })
+    // Order.
+    // A single order, one builder has to be assigned per order.
     const [order, setOrder] = useState({
         id: uuidv4(),
         builder_id: "",
@@ -16,25 +28,87 @@ export default function NewOrder({ setItems, items }) {
         total_amount: ""
     });
 
-    const handleOrderChange = (e) => {
-        setOrder({ ...order, [e.target.name]: e.target.value })
+    // Adds an item to the Order item array.
+    const handleAddItemOrder = (item) => {
+        order.items.push(item)
     }
-    const handleItemshange = (e) => {
+    // Updates an item's attributes.
+    const handleItemChange = (e) => {
         setItem({ ...item, [e.target.name]: e.target.value })
     }
 
+    // Submits Order.
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(order.items)
-        sendData()
+        let id = order.builder_id;
+        let order_items = order.items.length;
+        let total_amount = order.total_amount;
+        if (id === "" || order_items.length === 0 || total_amount === "") {
+            alert('Something is wrong. Please look over your order.')
+        } else {
+            e.preventDefault();
+            console.log(order)
+            postOrder()
+            setItems([])
+            setOrder({
+                id: uuidv4(),
+                builder_id: "",
+                items: [],
+                total_amount: 0
+            })
+            setSelected("");
+        }
+
     }
 
+    // Validates and adds an item.
+    // This also resets the Items and Order states.
     const handleAddItem = (e) => {
+        // Item cannot be added unless builder is set.
+        let no_builder_selected = order.builder_id === "";
         e.preventDefault();
-        console.log(item)
-        setItems([...items, item]);
+        if (item.name === "" || item.quantity === "" || no_builder_selected) {
+            alert("Please fill out the item details.")
+            setItem({
+                id: uuidv4(),
+                name: "",
+                price: "",
+                quantity: ""
+            })
+        } else {
+            setItems([...items, item]);
+            handleAddItemOrder(item)
+            console.log("First total", order.total_amount)
+            setOrder({ ...order, total_amount: order.total_amount += parseInt(item.price) })
+            console.log(order.total_amount)
+        }
+
+        setItem({
+            id: uuidv4(),
+            name: "",
+            price: "",
+            quantity: ""
+        })
     }
-    function sendData() {
+
+    // Opens builder modal.
+    const onOpen = e => {
+        setAnchorEl(e.currentTarget);
+    };
+
+    // Closes builder modal.
+    const onClose = () => {
+        setAnchorEl(null);
+    };
+
+    // Sets the selected builder.
+    const onSelect = selected => () => {
+        setSelected(selected);
+        setOrder({ ...order, builder_id: selected.id })
+        setAnchorEl(null);
+    };
+
+    // Send data to local node.js server.
+    function postOrder() {
         const payload = JSON.stringify({
             order
         })
@@ -51,31 +125,18 @@ export default function NewOrder({ setItems, items }) {
             body: payload
         })
     }
+
     return (
-        <Box width={1 / 3}>
-            <h2> Create new order</h2>
-            <form onSubmit={(e) => { handleAddItem(e) }}>
-                Add Item:
-                <br />
-                <input type="text" name="name" placeholder="Item name" value={item.name} required onChange={(e) => { handleItemshange(e) }} /><br />
-                <input type="number" name="quantity" placeholder="quantity" value={item.quantity} required onChange={(e) => { handleItemshange(e) }} /><br />
-                <input type="submit" value="Add Item" />
-            </form>
-            <form onSubmit={(e) => { handleSubmit(e) }}>
+        <Box sx={{ display: 'flex' }}>
+            <Box width={1 / 2}>
+                <SelectBuilder selected={selected} onOpen={onOpen} />
+                <AddItem item={item} handleItemChange={handleItemChange} handleAddItem={handleAddItem} />
+            </Box>
+            <Box width={1 / 2}>
+                <OrderItems items={items} handleSubmit={handleSubmit} />
+            </Box>
 
-                {/* Builder id */}
-                <label >
-                    Builder:
-                </label><br />
-                <input type="text" name="builder_id" value={order.builder_id} required onChange={(e) => { handleOrderChange(e) }} /><br />
-                <label >
-                    Amount:
-                </label><br />
-                <p type="number" name="total_amount" value={order.total_amount} required onChange={(e) => { handleOrderChange(e) }} /><br />
-                <input type="submit" value="Submit Order" />
-            </form>
-
-        </Box>
-
+            <ScrollMenu builders={builders} item={item} onSelect={onSelect} anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose} />
+        </Box >
     );
 }

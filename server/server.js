@@ -34,7 +34,6 @@ const builders = new Database();
 builders.set_data(getBuilders());
 
 const orders = new Database();
-orders.set_data(getOrders());
 
 // Middleware 
 app.use(cors())
