@@ -5,6 +5,7 @@ import SelectBuilder from "./SelectBuilder";
 import ScrollMenu from "./ScrollMenu";
 import OrderItems from "./OrderItems";
 
+// Creates long id numbers.
 const { v4: uuidv4 } = require('uuid');
 
 export default function NewOrder({ setItems, items, builders }) {

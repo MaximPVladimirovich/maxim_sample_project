@@ -6,5 +6,4 @@ export default function SubmitOrder({ handleSubmit }) {
             <Button variant="outlined" onClick={(e) => handleSubmit(e)}>Submit Order</Button>
         </Box>
     )
-
 }

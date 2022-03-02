@@ -4,6 +4,7 @@ import BuilderOrders from './BuilderOrders';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+// This page displays all the current builders.
 export default function Builders() {
     const [builders, setBuilders] = useState([]);
 

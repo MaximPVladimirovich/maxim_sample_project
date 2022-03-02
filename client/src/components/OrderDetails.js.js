@@ -42,6 +42,5 @@ export default function OrderDetails({ order }) {
                 </ListItem>
             </List>
         </Paper>
-
     )
 }
