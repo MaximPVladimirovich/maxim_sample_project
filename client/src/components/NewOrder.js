@@ -5,6 +5,7 @@ import SelectBuilder from "./SelectBuilder";
 import ScrollMenu from "./ScrollMenu";
 import OrderItems from "./OrderItems";
 
+// Creates long id numbers.
 const { v4: uuidv4 } = require('uuid');
 
 export default function NewOrder({ setItems, items, builders }) {
@@ -127,16 +128,20 @@ export default function NewOrder({ setItems, items, builders }) {
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <Box width={1 / 2}>
-                <SelectBuilder selected={selected} onOpen={onOpen} />
-                <AddItem item={item} handleItemChange={handleItemChange} handleAddItem={handleAddItem} />
-            </Box>
-            <Box width={1 / 2}>
-                <OrderItems items={items} handleSubmit={handleSubmit} />
-            </Box>
+        <Box sx={{ flexGrow: 1, my: 5 }}>
+            <Box sx={{ width: '60%', mx: 'auto' }}>
+                <Box sx={{ display: 'flex' }}>
+                    <Box width={1 / 2} >
+                        <SelectBuilder selected={selected} onOpen={onOpen} />
+                        <AddItem item={item} handleItemChange={handleItemChange} handleAddItem={handleAddItem} />
+                    </Box>
+                    <Box width={1 / 2}>
+                        <OrderItems items={items} handleSubmit={handleSubmit} />
+                    </Box>
 
-            <ScrollMenu builders={builders} item={item} onSelect={onSelect} anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose} />
+                    <ScrollMenu builders={builders} item={item} onSelect={onSelect} anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose} />
+                </Box>
+            </Box >
         </Box >
     );
 }

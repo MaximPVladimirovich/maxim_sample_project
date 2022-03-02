@@ -4,6 +4,7 @@ import BuilderOrders from './BuilderOrders';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+// This page displays all the current builders.
 export default function Builders() {
     const [builders, setBuilders] = useState([]);
 
@@ -36,7 +37,7 @@ export default function Builders() {
                         <Accordion key={index}>
                             <AccordionSummary expandIcon={< ArrowDropDownIcon />} aria-controls={`${builder.id}`} id={`${builder.id}`}>
                                 <AccountCircleIcon sx={{ m: 1 }} />
-                                <Typography sx={{ m: 1 }}>
+                                <Typography sx={{ m: 1, fontWeight: 'light' }}>
                                     {builder.name}
                                 </Typography>
                             </AccordionSummary>

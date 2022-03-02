@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material"
 import OrderDetails from "./OrderDetails.js"
+
 export default function BuilderOrders({ orders }) {
     let has_orders = orders.length !== 0;
     if (has_orders) {
