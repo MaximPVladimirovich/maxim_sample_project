@@ -43,7 +43,7 @@ export class Order {
     this[_ORDER_TOTAL_AMOUNT] = order_total_amount;
   }
 
-  get orderJSON() {
+  get toJSON() {
     return JSON.stringify({
       id: this.id,
       builder_id: this.builder_id,
@@ -54,7 +54,7 @@ export class Order {
 
   static parseOrderJSON(orderJSON) {
     const data = JSON.parse(orderJSON);
-    if (typeof data !== 'object' || !data.hasOwnProperty('id') || typeof data.id !== 'string' || !data.hasOwnProperty('builder_id') || typeof data.builder_id !== 'string' || !data.hasOwnProperty('items') || typeof items !== 'object' || !data.hasOwnProperty('total_amount' || typeof data.totalAmount !== 'string')) {
+    if (typeof data !== 'object' || !data.hasOwnProperty('id') || typeof data.id !== 'string' || !data.hasOwnProperty('builder_id') || typeof data.builder_id !== 'string' || !data.hasOwnProperty('items') || typeof items !== 'object' || !data.hasOwnProperty('total_amount' || typeof data.total_amount !== 'string')) {
       throw new Error(`Not a valid order ${orderJSON}`)
     }
     const order = new Order(data.id, data.builder_id, data.items, data.total_amount);
@@ -62,7 +62,7 @@ export class Order {
   }
 }
 
-export class AbstractNotesStore {
+export class AbstractOrdersStore {
   async close() { }
   async update(id, builder_id, items, total_amount) { }
   async create(id, builder_id, items, total_amount) { }
