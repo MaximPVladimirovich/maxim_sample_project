@@ -1,14 +1,14 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
-import { approotdir } from '../approotdir';
-import { Order, AbstractOrdersStore } from './Order';
+import { approotdir } from '../approotdir.mjs';
+import { Order, AbstractOrdersStore } from './Order.mjs';
 
-export class FSOrderStore extends AbstractOrdersStore {
+export default class FSOrdersStore extends AbstractOrdersStore {
   async update(id, builder_id, items, total_amount) {
     return updateOrder(id, builder_id, items, total_amount);
   }
 
-  async update(id, builder_id, items, total_amount) {
+  async create(id, builder_id, items, total_amount) {
     return updateOrder(id, builder_id, items, total_amount);
   }
 
@@ -25,6 +25,20 @@ export class FSOrderStore extends AbstractOrdersStore {
     // Unlink will remove the filename with the id.
     await fs.unlink(filePath(dir, id));
   }
+
+  async orderList() {
+    const dir = await orderDir();
+    let files = await fs.readdir(dir);
+    if (!files || files === 'undefined') {
+      files = []
+    }
+    const orders = files.map(async file => {
+      const id = path.basename(file, '.json');
+      const order = await readJson(orderDir, id);
+      return order
+    })
+    return Promise.all(orders)
+  }
 }
 
 // Gets the directory od the order data.
@@ -34,15 +48,15 @@ async function orderDir() {
   return dir;
 }
 
+// File path of an order.
+const filePath = (orderDir, id) => path.join(orderDir, `${id}.json`);
+
 // Retrieve order from directory and parse from json.
-async function readJson(orderDir, id) {
-  const readFrom = filePath(orderDir, id);
+async function readJson(orderdir, id) {
+  const readFrom = filePath(orderdir, id);
   const data = await fs.readFile(readFrom, 'utf8');
   return Order.parseOrderJSON(data);
 }
-
-// File path of an order.
-const filePath = (orderDir, id) => path.join(orderDir, `${id}.json`);
 
 // Updates or creates new order.
 async function updateOrder(id, builder_id, items, total_amount) {
