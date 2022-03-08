@@ -15,15 +15,15 @@ export class Order {
     return this[_ORDER_ID];
   }
 
-  get builderId() {
+  get builder_id() {
     return this[_ORDER_BUILDER_ID];
   }
 
-  get orderItems() {
+  get items() {
     return this[_ORDER_ITEMS];
   }
 
-  get totalAmount() {
+  get total_amount() {
     return this[_ORDER_TOTAL_AMOUNT];
   }
 
@@ -31,15 +31,15 @@ export class Order {
     this[_ORDER_ID] = order_id;
   }
 
-  set builderId(order_builder_id) {
+  set builder_id(order_builder_id) {
     this[_ORDER_BUILDER_ID] = order_builder_id;
   }
 
-  set orderItems(items) {
+  set items(items) {
     this[_ORDER_ITEMS] = items;
   }
 
-  set totalAmount(order_total_amount) {
+  set total_amount(order_total_amount) {
     this[_ORDER_TOTAL_AMOUNT] = order_total_amount;
   }
 
@@ -63,11 +63,11 @@ export class Order {
 }
 
 export class AbstractOrdersStore {
-  async close() { }
+  // async close() { }
   async update(id, builder_id, items, total_amount) { }
   async create(id, builder_id, items, total_amount) { }
-  async read(id) { }
-  async destroy(id) { }
-  async keyList() { }
-  async count() { }
+  // async read(id) { }
+  // async destroy(id) { }
+  // async keyList() { }
+  // async count() { }
 }
