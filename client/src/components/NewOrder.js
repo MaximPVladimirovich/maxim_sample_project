@@ -110,9 +110,7 @@ export default function NewOrder({ setItems, items, builders }) {
 
     // Send data to local node.js server.
     function postOrder() {
-        const payload = JSON.stringify({
-            order
-        })
+        const payload = JSON.stringify(order)
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -120,7 +118,7 @@ export default function NewOrder({ setItems, items, builders }) {
         })
 
         // Send data to the backend via POST
-        fetch('http://localhost:3001/neworder', {  // Enter your IP address here
+        fetch('http://localhost:3001/orders/neworder', {  // Enter your IP address here
             method: 'POST',
             headers: headers,
             body: payload

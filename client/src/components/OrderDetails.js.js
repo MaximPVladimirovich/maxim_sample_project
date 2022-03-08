@@ -1,5 +1,4 @@
 import { List, ListItem, Typography, Paper } from "@mui/material";
-import { parse } from "uuid";
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -9,7 +8,7 @@ function calculateTotal(order) {
     let items = order.items;
     let sum = 0;
     items.forEach(item => {
-        sum += parseInt(item.quantity) * parseInt(item.price)
+        sum += parseFloat(item.quantity) * parseFloat(item.price)
     })
     return sum
 }

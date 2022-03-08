@@ -17,16 +17,21 @@ export default function NavBar() {
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end', flexGrow: 1, justifyContent: 'space-evenly' }}>
-                    {menu.map((item, index) => {
-                        let url = item.replace(' ', '');
-                        return (
-                            <Link key={index} href={`/${url.toLowerCase()}`} sx={{ color: '#fff' }} underline="hover" variant="text" >
-                                <Typography>
-                                    {item}
-                                </Typography>
-                            </Link>
-                        )
-                    })}
+                    <Link href={`/builders`} sx={{ color: '#fff' }} underline="hover" variant="text" >
+                        <Typography>
+                            Builders
+                        </Typography>
+                    </Link>
+                    <Link href={`/builders/newbuilder`} sx={{ color: '#fff' }} underline="hover" variant="text" >
+                        <Typography>
+                            New Builder
+                        </Typography>
+                    </Link>
+                    <Link href={`/orders/neworder`} sx={{ color: '#fff' }} underline="hover" variant="text" >
+                        <Typography>
+                            New Order
+                        </Typography>
+                    </Link>
                 </Box>
             </AppBar >
         </Box >
