@@ -1,4 +1,4 @@
-[
+export const data = [
   {
     "createdAt": "2021-03-05T08:33:08.321Z",
     "name": "Patsy Dickinson",
