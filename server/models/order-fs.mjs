@@ -39,6 +39,12 @@ export default class FSOrdersStore extends AbstractOrdersStore {
     })
     return Promise.all(orders)
   }
+
+  async countOrders() {
+    const dir = orderDir();
+    const files = await fs.readdir(dir);
+    return files.length;
+  }
 }
 
 // Gets the directory od the order data.
