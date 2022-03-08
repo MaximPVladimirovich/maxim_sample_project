@@ -10,10 +10,6 @@ function getBuilders() {
     return builders_data
 }
 
-function getOrders() {
-    return orders_data;
-}
-
 class Database {
     constructor() {
         this.data = [];
@@ -39,6 +35,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
+
+// Routing
 app.get('/', (req, res) => {
     res.json(builders.data)
 })
@@ -60,6 +58,7 @@ app.post('/neworder', (req, res) => {
     // Creates order property if builde has none.
     let builder_orders = !builder.orders ? builder.orders = [] : builder.orders;
     builder_orders.push(req.body.order);
+    console.log(req.body.order);
     res.send('Order has been placed.')
 })
 
