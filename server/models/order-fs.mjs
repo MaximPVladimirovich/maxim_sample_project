@@ -69,11 +69,17 @@ export default class FSOrdersStore extends AbstractOrdersStore {
     })
     return Promise.all(orders)
   }
+
+  async countOrders() {
+    const dir = orderDir();
+    const files = await fs.readdir(dir);
+    return files.length;
+  }
 }
 
 // Gets the directory od the order data.
-async function orderDir() {
-  const dir = path.join(approotdir, 'ordersData');
+async function orderDir(builder_id) {
+  const dir = path.join(approotdir, `ordersData/${builder_id}`);
   await fs.ensureDir(dir);
   return dir;
 }
@@ -90,7 +96,7 @@ async function readJson(orderdir, id) {
 
 // Updates or creates new order.
 async function createOrder(id, builder_id, items, total_amount) {
-  const orderDirectory = await orderDir();
+  const orderDirectory = await orderDir(builder_id);
   const order = new Order(id, builder_id, items, total_amount);
   const writeDataTo = filePath(orderDirectory, id);
   const writeJsonTo = order.toJSON;
