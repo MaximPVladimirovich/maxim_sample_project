@@ -12,7 +12,7 @@ export default class FSOrdersStore extends AbstractOrdersStore {
   }
 
   async create(id, builder_id, items, total_amount) {
-    return updateOrder(id, builder_id, items, total_amount);
+    return createOrder(id, builder_id, items, total_amount);
   }
 
   async read(id) {
@@ -89,7 +89,7 @@ async function readJson(orderdir, id) {
 }
 
 // Updates or creates new order.
-async function updateOrder(id, builder_id, items, total_amount) {
+async function createOrder(id, builder_id, items, total_amount) {
   const orderDirectory = await orderDir();
   const order = new Order(id, builder_id, items, total_amount);
   const writeDataTo = filePath(orderDirectory, id);
@@ -97,3 +97,4 @@ async function updateOrder(id, builder_id, items, total_amount) {
   await fs.writeFile(writeDataTo, writeJsonTo, 'utf8');
   return order;
 }
+
