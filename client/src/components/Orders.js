@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import { List, ListItem } from "@mui/material";
 export default function Orders() {
   const [orders, setOrders] = useState([]);
 
@@ -24,7 +24,11 @@ export default function Orders() {
       <h2>Display Orders</h2>
       {orders.map((order, index) => {
         return (
-          <p key={index}>{order._ORDER_ID}</p>
+          <List key={index}>
+            <ListItem >{order._ORDER_ID}</ListItem>
+            <ListItem>$ {order._ORDER_TOTAL_AMOUNT} </ListItem>
+          </List>
+
         )
       })}
     </>
