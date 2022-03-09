@@ -27,6 +27,11 @@ export default function NavBar() {
                             New Builder
                         </Typography>
                     </Link>
+                    <Link href={`/orders`} sx={{ color: '#fff' }} underline="hover" variant="text" >
+                        <Typography>
+                            Orders
+                        </Typography>
+                    </Link>
                     <Link href={`/orders/neworder`} sx={{ color: '#fff' }} underline="hover" variant="text" >
                         <Typography>
                             New Order

@@ -13,7 +13,7 @@ export default function Order() {
             const jsonHeaders = new Headers({
                 mode: 'no-cors'
             })
-            const url = "http://localhost:3001";
+            const url = "http://localhost:3001/builders";
             // Fetch data from node server.
             const res = await fetch(url, { headers: jsonHeaders });
             // Parse data into json.

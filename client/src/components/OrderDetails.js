@@ -5,7 +5,7 @@ function numberWithCommas(x) {
 }
 
 function calculateTotal(order) {
-    let items = order.items;
+    let items = order._ORDER_ITEMS;
     let sum = 0;
     items.forEach(item => {
         sum += parseFloat(item.quantity) * parseFloat(item.price)
@@ -21,14 +21,14 @@ export default function OrderDetails({ order }) {
                     <Typography sx={{ fontWeight: '550' }}>
                         Order Id:
                     </Typography>
-                    {order.id}
+                    {order._ORDER_ID}
                 </ListItem>
                 <ListItem>
                     <Typography sx={{ fontWeight: '550' }}>
                         Items:
                     </Typography>
                 </ListItem>
-                {order.items.map((item, index) => {
+                {order._ORDER_ITEMS.map((item, index) => {
                     return (
                         <ListItem key={index}>
                             <Typography>{index + 1}:  {item.name}</Typography>

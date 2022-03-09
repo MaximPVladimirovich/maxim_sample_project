@@ -26,7 +26,7 @@ export default function NewOrder({ setItems, items, builders }) {
         id: uuidv4(),
         builder_id: "",
         items: [],
-        total_amount: ""
+        total_amount: 0
     });
 
     // Adds an item to the Order item array.
@@ -78,8 +78,7 @@ export default function NewOrder({ setItems, items, builders }) {
         } else {
             setItems([...items, item]);
             handleAddItemOrder(item)
-            console.log("First total", order.total_amount)
-            setOrder({ ...order, total_amount: order.total_amount += parseInt(item.price) })
+            setOrder({ ...order, total_amount: order.total_amount += parseInt(item.price * item.quantity) })
             console.log(order.total_amount)
         }
 
