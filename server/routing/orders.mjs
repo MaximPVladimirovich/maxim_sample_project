@@ -4,6 +4,14 @@ import { approotdir } from '../approotdir.mjs';
 export const router = express.Router();
 
 let orders = new FSOrdersStore();
+router.get('/', async (req, res, next) => {
+  try {
+    const result = await orders.orders();
+    res.send(result)
+  } catch (error) {
+    next(error);
+  }
+})
 
 router.post('/neworder', async (req, res, next) => {
   try {

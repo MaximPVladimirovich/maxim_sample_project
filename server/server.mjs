@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routing
-app.get('/', (req, res) => {
+app.get('/builders', (req, res) => {
     res.json(b)
 })
 

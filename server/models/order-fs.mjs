@@ -2,6 +2,9 @@ import fs from 'fs-extra';
 import path from 'path';
 import { approotdir } from '../approotdir.mjs';
 import { Order, AbstractOrdersStore } from './Order.mjs';
+import Debug from 'debug';
+
+const debug = Debug('server:order-fs');
 
 export default class FSOrdersStore extends AbstractOrdersStore {
   async update(id, builder_id, items, total_amount) {
@@ -34,7 +37,34 @@ export default class FSOrdersStore extends AbstractOrdersStore {
     }
     const orders = files.map(async file => {
       const id = path.basename(file, '.json');
-      const order = await readJson(orderDir, id);
+      const order = await readJson(dir, id);
+      return order.id
+    })
+    return Promise.all(orders)
+  }
+
+  async builderOrders(id) {
+    const dir = await orderDir();
+    let files = await fs.readdir(dir);
+    if (!files || files === 'undefined') {
+      files = [];
+    }
+
+    const orders = files.filter(async file => {
+      const order = await readJson(dir, id);
+      return order.builder_id === id
+    })
+    return Promise.all(orders);
+  }
+  async orders() {
+    const dir = await orderDir();
+    let files = await fs.readdir(dir);
+    if (!files || files === 'undefined') {
+      files = []
+    }
+    const orders = files.map(async file => {
+      const id = path.basename(file, '.json');
+      const order = await readJson(dir, id);
       return order
     })
     return Promise.all(orders)
