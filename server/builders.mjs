@@ -1,6 +1,10 @@
 import { data } from "./data.mjs";
-
-export default function getBuilders() {
-  let p = JSON.stringify(data);
+// let jsonData = JSON.parse(data);
+export function getBuilders() {
+  let p = data;
   return p
+}
+
+export function addBuilder(b) {
+  data.push(b)
 }
