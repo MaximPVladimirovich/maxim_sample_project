@@ -33,20 +33,6 @@ export default class FSOrdersStore extends AbstractOrdersStore {
     return await orders();
   }
 
-  async orderList() {
-    const dir = await orderDir();
-    let files = await fs.readdir(dir);
-    if (!files || files === 'undefined') {
-      files = []
-    }
-    const orders = files.map(async file => {
-      const id = path.basename(file, '.json');
-      const order = await readJson(dir, id);
-      return order.id
-    })
-    return Promise.all(orders)
-  }
-
   async countOrders() {
     const dir = orderDir();
     const files = await fs.readdir(dir);
@@ -72,10 +58,9 @@ async function orders() {
   return Promise.all(orderDirs)
 }
 
-orders();
 // Gets the directory od the order data.
 async function orderDir(builder_id) {
-  const dir = path.join(approotdir, `ordersData / ${builder_id}`);
+  const dir = path.join(approotdir, `ordersData/${builder_id}`);
   await fs.ensureDir(dir);
   return dir;
 }

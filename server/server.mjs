@@ -1,12 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import getBuilders from './builders.mjs';
+import { getBuilders, addBuilder } from './builders.mjs';
 import { router } from './routing/orders.mjs';
 
 const port = 3001;
 const app = express();
 
-let b = JSON.parse(getBuilders());
+let b = getBuilders();
 
 // Middleware 
 app.use(cors())
@@ -21,11 +21,8 @@ app.get('/builders', (req, res) => {
 app.post('/', (req, res) => {
     console.log(req.body)
     // Sets id of builder.
-    if (!req.body.builder.id) {
-        req.body.builder.id = builders.get_size() + 1;
-    }
     // Adds new builder to the list.
-    builders.add_item(req.body.builder);
+    addBuilder(req.body);
     res.send('Builder has been created.')
 })
 
