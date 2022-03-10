@@ -1,4 +1,4 @@
-import { default as express } from 'express';
+import express from 'express';
 import FSOrdersStore from '../models/order-fs.mjs';
 import { approotdir } from '../approotdir.mjs';
 export const router = express.Router();
@@ -6,7 +6,7 @@ export const router = express.Router();
 let orders = new FSOrdersStore();
 router.get('/', async (req, res, next) => {
   try {
-    const result = await orders.orders();
+    const result = await orders.allOrders();
     res.send(result)
   } catch (error) {
     next(error);

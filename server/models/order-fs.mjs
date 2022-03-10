@@ -29,6 +29,10 @@ export default class FSOrdersStore extends AbstractOrdersStore {
     await fs.unlink(filePath(dir, id));
   }
 
+  async allOrders() {
+    return await orders();
+  }
+
   async orderList() {
     const dir = await orderDir();
     let files = await fs.readdir(dir);
@@ -43,33 +47,6 @@ export default class FSOrdersStore extends AbstractOrdersStore {
     return Promise.all(orders)
   }
 
-  async builderOrders(id) {
-    const dir = await orderDir();
-    let files = await fs.readdir(dir);
-    if (!files || files === 'undefined') {
-      files = [];
-    }
-
-    const orders = files.filter(async file => {
-      const order = await readJson(dir, id);
-      return order.builder_id === id
-    })
-    return Promise.all(orders);
-  }
-  async orders() {
-    const dir = await orderDir();
-    let files = await fs.readdir(dir);
-    if (!files || files === 'undefined') {
-      files = []
-    }
-    const orders = files.map(async file => {
-      const id = path.basename(file, '.json');
-      const order = await readJson(dir, id);
-      return order
-    })
-    return Promise.all(orders)
-  }
-
   async countOrders() {
     const dir = orderDir();
     const files = await fs.readdir(dir);
@@ -77,9 +54,28 @@ export default class FSOrdersStore extends AbstractOrdersStore {
   }
 }
 
+async function orders() {
+  const dir = await path.join(approotdir, 'ordersData');
+  let folders = await fs.readdir(dir);
+  if (!folders || folders === 'undefined') {
+    folders = [];
+  }
+  let orderDirs = folders.map(async folder => {
+    const folderpath = await path.join(dir, folder);
+    folder = await fs.readdir(folderpath);
+    let folderData = folder.map(async file => {
+      let content = await fs.readFile(path.join(folderpath, file), 'utf8');
+      return JSON.parse(content)
+    })
+    return Promise.all(folderData)
+  })
+  return Promise.all(orderDirs)
+}
+
+orders();
 // Gets the directory od the order data.
 async function orderDir(builder_id) {
-  const dir = path.join(approotdir, `ordersData/${builder_id}`);
+  const dir = path.join(approotdir, `ordersData / ${builder_id}`);
   await fs.ensureDir(dir);
   return dir;
 }
