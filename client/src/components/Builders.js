@@ -18,7 +18,7 @@ export default function Builders() {
             const url = "http://localhost:3001/orders"
             const res = await fetch(url, { headers: jsonHeaders });
             const data = await res.json();
-            setOrders(data);
+            setOrders(data.flat());
         }
 
         const getBuilders = async function () {
@@ -42,7 +42,7 @@ export default function Builders() {
             {
                 builders.map((builder, index) => {
                     let _orders = orders.filter(order => {
-                        return order._ORDER_BUILDER_ID === builder.id;
+                        return order.builder_id === builder.id;
                     })
                     return (
                         <Accordion key={index}>

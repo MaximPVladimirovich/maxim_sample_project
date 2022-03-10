@@ -103,6 +103,7 @@ export default function NewOrder({ setItems, items, builders }) {
     // Sets the selected builder.
     const onSelect = selected => () => {
         setSelected(selected);
+        console.log(selected.id)
         setOrder({ ...order, builder_id: selected.id })
         setAnchorEl(null);
     };
