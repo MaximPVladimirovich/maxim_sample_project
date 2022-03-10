@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 export const data = [
   {
     "createdAt": "2021-03-05T08:33:08.321Z",
@@ -11,7 +12,7 @@ export const data = [
       },
       "description": "04540 Cecelia Coves"
     },
-    "id": "1"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-11-22T05:51:50.105Z",
@@ -25,7 +26,7 @@ export const data = [
       },
       "description": "82664 Hermann Wells"
     },
-    "id": "2"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-12-04T01:41:07.862Z",
@@ -39,7 +40,7 @@ export const data = [
       },
       "description": "060 Kellie Tunnel"
     },
-    "id": "3"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-07-05T04:49:10.627Z",
@@ -53,7 +54,7 @@ export const data = [
       },
       "description": "634 Gutmann Cape"
     },
-    "id": "4"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-02-23T09:56:26.426Z",
@@ -67,7 +68,7 @@ export const data = [
       },
       "description": "8188 Beier Valleys"
     },
-    "id": "5"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-10-16T06:14:44.028Z",
@@ -81,7 +82,7 @@ export const data = [
       },
       "description": "02943 Eunice Cape"
     },
-    "id": "6"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-11-25T00:08:54.766Z",
@@ -95,7 +96,7 @@ export const data = [
       },
       "description": "5724 Stokes Vista"
     },
-    "id": "7"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-04-05T10:22:36.788Z",
@@ -109,7 +110,7 @@ export const data = [
       },
       "description": "13591 Gutmann Stravenue"
     },
-    "id": "8"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-02-19T14:28:10.994Z",
@@ -123,7 +124,7 @@ export const data = [
       },
       "description": "2404 Yessenia Squares"
     },
-    "id": "9"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-05-03T21:08:38.852Z",
@@ -137,7 +138,7 @@ export const data = [
       },
       "description": "40137 Tiffany Groves"
     },
-    "id": "10"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-09-27T21:49:16.461Z",
@@ -151,7 +152,7 @@ export const data = [
       },
       "description": "693 Becker Place"
     },
-    "id": "11"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-04-02T06:17:17.149Z",
@@ -165,7 +166,7 @@ export const data = [
       },
       "description": "877 Herzog Walk"
     },
-    "id": "12"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-04-25T19:58:10.885Z",
@@ -179,7 +180,7 @@ export const data = [
       },
       "description": "742 Mueller Club"
     },
-    "id": "13"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-07-30T21:13:03.497Z",
@@ -193,7 +194,7 @@ export const data = [
       },
       "description": "551 Kuhlman Hollow"
     },
-    "id": "14"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-08-20T02:47:42.080Z",
@@ -207,7 +208,7 @@ export const data = [
       },
       "description": "7794 Florencio Underpass"
     },
-    "id": "15"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-10-27T09:21:45.910Z",
@@ -221,7 +222,7 @@ export const data = [
       },
       "description": "4340 Morar Highway"
     },
-    "id": "16"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-06-12T11:48:32.644Z",
@@ -235,7 +236,7 @@ export const data = [
       },
       "description": "919 Doyle Creek"
     },
-    "id": "17"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-12-10T11:48:04.207Z",
@@ -249,7 +250,7 @@ export const data = [
       },
       "description": "143 Allene Mount"
     },
-    "id": "18"
+    "id": uuidv4()
   },
   {
     "createdAt": "2021-04-27T11:42:32.425Z",
@@ -263,6 +264,6 @@ export const data = [
       },
       "description": "1003 Randall Avenue"
     },
-    "id": "19"
+    "id": uuidv4()
   }
 ]
