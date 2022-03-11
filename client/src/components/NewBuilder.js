@@ -52,9 +52,7 @@ export default function NewBuilder() {
 
     // Sends to local node server.
     function sendData() {
-        const payload = JSON.stringify({
-            builder
-        })
+        const payload = JSON.stringify(builder)
 
         const headers = new Headers({
             'Content-Type': 'application/json',

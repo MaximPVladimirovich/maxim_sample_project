@@ -7,6 +7,7 @@ import Debug from 'debug';
 const debug = Debug('server:order-fs');
 
 export default class FSOrdersStore extends AbstractOrdersStore {
+
   async update(id, builder_id, items, total_amount) {
     return updateOrder(id, builder_id, items, total_amount);
   }

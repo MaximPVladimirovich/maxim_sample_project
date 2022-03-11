@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { List, ListItem } from "@mui/material";
+import { Box, List, ListItem, Typography } from "@mui/material";
 export default function Orders() {
   const [orders, setOrders] = useState([]);
 
@@ -13,24 +13,27 @@ export default function Orders() {
       const res = await fetch(url, { headers: jsonHeaders });
 
       const data = await res.json();
-      console.log(data)
-      setOrders(data);
+      setOrders(data.flat());
     }
     getOrders().catch(console.error);
   }, []);
 
   return (
-    <>
-      <h2>Display Orders</h2>
+    <List>
+      <ListItem>
+        <Typography variant="h3">
+          Orders
+        </Typography>
+      </ListItem>
       {orders.map((order, index) => {
         return (
           <List key={index}>
-            <ListItem >{order._ORDER_ID}</ListItem>
-            <ListItem>$ {order._ORDER_TOTAL_AMOUNT} </ListItem>
+            <ListItem >{order.id}</ListItem>
+            <ListItem>$ {order.total_amount} </ListItem>
           </List>
-
         )
-      })}
-    </>
+      }
+      )}
+    </List>
   )
 }
