@@ -6,6 +6,7 @@ export default function BuilderOrders({ _orders }) {
     if (has_orders) {
         return (
             <Box>
+//             Map orders to detail components.
                 {_orders.map((order, index) => {
                     return (
                         <OrderDetails key={index} order={order} ></OrderDetails>
